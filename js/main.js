@@ -1,9 +1,9 @@
-import {datubasea} from './datubasea.js'
+import {basededatos} from './basededatos.js'
 
 
-let indizea = 0
+let indice = 0
 const URLBASE = 'https://covers.openlibrary.org/b/id/'
-let izenburua  = document.getElementById('izenburua');
+let tituloa = document.getElementById('tituloa');
 let irudia = document.getElementById('irudia')
 let egilea = document.getElementById('egilea')
 let isbn = document.getElementById('isbn')
@@ -12,11 +12,11 @@ let atzera = document.getElementById('atzera')
 
 function eremuakBete(){
 
-    izenburua.value = datubasea[indizea].izenburua
-    data.value = datubasea[indizea].data
-    egilea.value = datubasea[indizea].egilea
-    isbn.value = datubasea[indizea].isbn
-    irudia.src = URLBASE + datubasea[indizea].filename 
+    tituloa.value = basededatos[indice].titulo
+    data.value = basededatos[indice].fecha
+    egilea.value = basededatos[indice].autor
+    isbn.value = basededatos[indice].isbn
+    irudia.src = URLBASE + basededatos[indice].filename 
 
 }
 
@@ -26,13 +26,13 @@ function kargatu(){
     eremuakBete()
 
     aurrera.addEventListener('click', (event) => {
-        if (indizea < datubasea.length-1)
-            indizea++
-        eremuakBete()
+        if (indice < basededatos.length-1)
+            indice++
+        eremuaBete()
     })
     atzera.addEventListener('click', (event) => {
-        if (indizea > 0)
-            indizea--
+        if (indice > 0)
+            indice--
         eremuakBete()
     })
 
