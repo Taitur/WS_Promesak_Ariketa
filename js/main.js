@@ -10,6 +10,7 @@ let isbn = document.getElementById('isbn')
 let aurrera = document.getElementById('aurrera')
 let atzera = document.getElementById('atzera')
 let bilatuBotoia = document.getElementById('bilatu');
+let bilLiburua = [];
 
 function eremuakBete(){
 
@@ -21,13 +22,34 @@ function eremuakBete(){
 
 }
 
-function convert(json){
+function eremuakBete(liburu){
+
+    tituloa.value = liburu.titulo
+    data.value = liburu.fecha
+    egilea.value = liburu.autor
+    isbn.value = liburu.isbn
+    irudia.src = URLBASE + liburu.filename 
+
+}
+
+function convert(book)
+{
+    let clave = Object.keys(book);
+    let libro = book[clave];
+    return {   "isbn": libro.bib_key.split(":")[1], // Split to get the part after the colon
+        "titulo": libro.details.title, // Title of the book
+        "autor": libro.details.authors.map(author => author.name).join(" ; "), // Join authors' names with semicolon
+        "fecha": libro.details.publish_date, // Publish date
+        "filename" : `${libro.details.covers[0]}-M.jpg`
+    };
 
 }
 
 function bilatu(){
-    basededatos.filter()
-    
+   bilLiburua =  basededatos.filter(book => {book.isbn === isbn.value});
+   if(bilLiburua.length == 0){
+    indice = -1;
+   }
 }
 
 function kargatu(){
@@ -47,6 +69,12 @@ function kargatu(){
 
     bilatuBotoia.addEventListener('click', (event) => {
         bilatu()
+        if(indice != -1){
+            eremuakBete();
+        } else {
+            fetch("https://openlibrary.org/api/books?bibkeys=ISBN:" + isbn.value + "&format=json&jscmd=data").then(r => r.json()).then(data => {
+                bilLiburua = convert(data);
+            })}
     })
 
 }
