@@ -9,6 +9,7 @@ let egilea = document.getElementById('egilea')
 let isbn = document.getElementById('isbn')
 let aurrera = document.getElementById('aurrera')
 let atzera = document.getElementById('atzera')
+let bilatuBotoia = document.getElementById('bilatu');
 
 function eremuakBete(){
 
@@ -20,6 +21,14 @@ function eremuakBete(){
 
 }
 
+function convert(json){
+
+}
+
+function bilatu(){
+    basededatos.filter()
+    
+}
 
 function kargatu(){
 
@@ -36,8 +45,12 @@ function kargatu(){
         eremuakBete()
     })
 
+    bilatuBotoia.addEventListener('click', (event) => {
+        bilatu()
+    })
 
 }
+
 
 window.onload = kargatu;
 
