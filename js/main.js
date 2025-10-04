@@ -22,7 +22,7 @@ function eremuakBete(){
 
 }
 
-function eremuakBete(liburu){
+function eremuakBeteWeb(liburu){
 
     tituloa.value = liburu.titulo
     data.value = liburu.fecha
@@ -59,7 +59,7 @@ function kargatu(){
     aurrera.addEventListener('click', (event) => {
         if (indice < basededatos.length-1)
             indice++
-        eremuaBete()
+        eremuakBete()
     })
     atzera.addEventListener('click', (event) => {
         if (indice > 0)
@@ -74,7 +74,11 @@ function kargatu(){
         } else {
             fetch("https://openlibrary.org/api/books?bibkeys=ISBN:" + isbn.value + "&format=json&jscmd=data").then(r => r.json()).then(data => {
                 bilLiburua = convert(data);
-            })}
+                console.log(bilLiburua);
+            })
+            eremuakBeteWeb(bilLiburua);
+        }
+            
     })
 
 }
